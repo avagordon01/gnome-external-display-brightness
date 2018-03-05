@@ -1,0 +1,6 @@
+{
+    "name": "external-display-brightness",
+    "description": "Make external monitors reflect brightness slider",
+    "uuid": "external-display-brightness@paddygord.github.com",
+    "shell-version": ["3.26.2"]
+}
