@@ -8,6 +8,7 @@ let connectId;
 
 function _update() {
     overlays.forEach(function(overlay) {
+        //FIXME for some reason sliderActor.value isn't set on refresh
         overlay.opacity = 256 * (1 - sliderActor.value);
     });
 }
@@ -19,20 +20,23 @@ function enable() {
 
     overlays = [];
     Main.layoutManager.monitors.forEach(function(monitor) {
-        let overlay = new St.Label({
-            style_class: 'overlay',
-        });
-        Main.uiGroup.add_actor(overlay);
+        //if the embedded display is not index 0, change this
+        if (monitor.index != 0) {
+            let overlay = new St.Label({
+                style_class: 'overlay',
+            });
+            Main.uiGroup.add_actor(overlay);
 
-        overlay.set_width(monitor.width);
-        overlay.set_height(monitor.height);
-        overlay.set_x(monitor.x);
-        overlay.set_y(monitor.y);
+            overlay.set_width(monitor.width);
+            overlay.set_height(monitor.height);
+            overlay.set_x(monitor.x);
+            overlay.set_y(monitor.y);
+            overlay.opacity = 0;
 
-        overlays.push(overlay)
+            overlays.push(overlay)
+        }
     });
 
-    overlay.opacity = 256 * (sliderActor.value);
     _update();
 }
 
