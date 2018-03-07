@@ -21,7 +21,8 @@ function enable() {
     overlays = [];
     Main.layoutManager.monitors.forEach(function(monitor) {
         //if the embedded display is not index 0, change this
-        if (monitor.index != 0) {
+        //FIXME this doesn't work when mirroring displays
+        {
             let overlay = new St.Label({
                 style_class: 'overlay',
             });
@@ -31,7 +32,6 @@ function enable() {
             overlay.set_height(monitor.height);
             overlay.set_x(monitor.x);
             overlay.set_y(monitor.y);
-            overlay.opacity = 0;
 
             overlays.push(overlay)
         }
